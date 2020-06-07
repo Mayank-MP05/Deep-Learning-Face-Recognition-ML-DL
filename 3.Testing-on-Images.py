@@ -28,7 +28,7 @@ recognizer = pickle.load(open('face-recognition-op/recognition-svm-model.pkl', "
 le = pickle.load(open('face-recognition-op/label-encoder.pkl', "rb"))
 # -----------------------------------------------------------------------
 
-img = cv2.imread('testing-images/group-pic (3).jpg')
+img = cv2.imread('testing-images/group-pic (1).jpg')
 # cv2.imshow("Full Group Here ...",img)
 
 image = imutils.resize(img, width=600)
