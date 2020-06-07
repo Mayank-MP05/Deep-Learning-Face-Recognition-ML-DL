@@ -4,6 +4,7 @@ import os
 import imutils
 from imutils import paths
 import pickle
+import random 
 
 training = 'training-images'
 feature_op = 'features-saved'
@@ -29,6 +30,7 @@ print("*** Feature Extraction loading  done ... ***")
 # grab the paths to the input images in our dataset
 print("[INFO] quantifying faces...")
 imagePaths = list(paths.list_images(training))
+random.shuffle(imagePaths)
 # print(imagePaths)
 
 features_array = []
@@ -37,8 +39,8 @@ labels_array = []
 total = 0
 
 for (i, imagePath) in enumerate(imagePaths):
-    print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
     name = imagePath.split(os.sep)[-2]
+    print("[INFO] processing image {}/{} : {}".format(i + 1, len(imagePaths), name))
 
     image = cv2.imread(imagePath)
     image = imutils.resize(image, width=600)
