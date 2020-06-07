@@ -28,7 +28,7 @@ recognizer = pickle.load(open('face-recognition-op/recognition-svm-model.pkl', "
 le = pickle.load(open('face-recognition-op/label-encoder.pkl', "rb"))
 # -----------------------------------------------------------------------
 
-img = cv2.imread('testing-images/group-pic (2).jpg')
+img = cv2.imread('testing-images/group-pic (3).jpg')
 # cv2.imshow("Full Group Here ...",img)
 
 image = imutils.resize(img, width=600)
@@ -81,11 +81,14 @@ for i in range(0, detections.shape[2]):
 		# probability
 		text = "{}: {:.2f}%".format(name, proba * 100)
 		y = startY - 10 if startY - 10 > 10 else startY + 10
-		cv2.rectangle(image, (startX, startY), (endX, endY),
-			(0, 0, 255), 2)
+		#cv2.rectangle(image, (startX, startY), (endX, endY),
+		#	(0, 0, 255), 2)	
+		cv2.circle(image, ((startX + endX)//2, (startY + endY)//2), (max((- startX + endX)//2, (- startY + endY)//2) + 10),
+			(0, 255, 0), 2)		
+
 		cv2.putText(image, text, (startX, y),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
 
 # show the output image
-cv2.imshow("Image", image)
+cv2.imshow("Drawn - Face Recognised ...", image)
 cv2.waitKey(0)
