@@ -38,7 +38,7 @@ total = 0
 
 for (i, imagePath) in enumerate(imagePaths):
     print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
-    name = imagePath.split(os.sep)[-1]
+    name = imagePath.split(os.sep)[-2]
 
     image = cv2.imread(imagePath)
     image = imutils.resize(image, width=600)
