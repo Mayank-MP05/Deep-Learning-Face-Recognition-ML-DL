@@ -3,9 +3,10 @@ import cv2
 import os
 import imutils
 from imutils import paths
+import pickle
 
 training = 'training-images'
-feature_op = 'featuress-saved'
+feature_op = 'features-saved'
 detector = 'feature-extract-model'
 feature_model = 'feature-extract-model/openface.t7'
 least_confidence = 0.65
@@ -36,7 +37,7 @@ labels_array = []
 total = 0
 
 for (i, imagePath) in enumerate(imagePaths):
-    print("[INFO] processing image {}/{}".format(i + 1,len(imagePaths)))
+    print("[INFO] processing image {}/{}".format(i + 1, len(imagePaths)))
     name = imagePath.split(os.sep)[-1]
 
     image = cv2.imread(imagePath)
@@ -89,6 +90,90 @@ for (i, imagePath) in enumerate(imagePaths):
             features_array.append(vec.flatten())
             total += 1
 
-print(total)
-print(features_array)
-print(labels_array)
+# print(total)
+# print(features_array)
+# print(labels_array)
+
+# Saving With Pickle
+data = {"featuers": features_array, "labels": labels_array}
+f = open(f'{feature_op}/extracted-feature-data.pkl', "wb")
+f.write(pickle.dumps(data))
+f.close()
+print('**** DATA SAVED SUCESS ****')
+
+
+"""
+(base) D:\LearnPythonQuarantine\face recognition\trip-DL>C:/Users/pc/Anaconda3/python.exe "d:/LearnPythonQuarantine/face recognition/trip-DL/1-Feature-Extraction.py"
+*** face detector started ... ***
+*** face detector done ... ***
+*** Feature Extraction loading started ... ***
+*** Feature Extraction loading  done ... ***
+[INFO] quantifying faces...
+[INFO] processing image 1/66
+[INFO] processing image 2/66
+[INFO] processing image 3/66
+[INFO] processing image 4/66
+[INFO] processing image 5/66
+[INFO] processing image 6/66
+[INFO] processing image 7/66
+[INFO] processing image 8/66
+[INFO] processing image 9/66
+[INFO] processing image 10/66
+[INFO] processing image 11/66
+[INFO] processing image 12/66
+[INFO] processing image 13/66
+[INFO] processing image 14/66
+[INFO] processing image 15/66
+[INFO] processing image 16/66
+[INFO] processing image 17/66
+[INFO] processing image 18/66
+[INFO] processing image 19/66
+[INFO] processing image 20/66
+[INFO] processing image 21/66
+[INFO] processing image 22/66
+[INFO] processing image 23/66
+[INFO] processing image 24/66
+[INFO] processing image 25/66
+[INFO] processing image 26/66
+[INFO] processing image 27/66
+[INFO] processing image 28/66
+[INFO] processing image 29/66
+[INFO] processing image 30/66
+[INFO] processing image 31/66
+[INFO] processing image 32/66
+[INFO] processing image 33/66
+[INFO] processing image 34/66
+[INFO] processing image 35/66
+[INFO] processing image 36/66
+[INFO] processing image 37/66
+[INFO] processing image 38/66
+[INFO] processing image 39/66
+[INFO] processing image 40/66
+[INFO] processing image 41/66
+[INFO] processing image 42/66
+[INFO] processing image 43/66
+[INFO] processing image 44/66
+[INFO] processing image 45/66
+[INFO] processing image 46/66
+[INFO] processing image 47/66
+[INFO] processing image 48/66
+[INFO] processing image 49/66
+[INFO] processing image 50/66
+[INFO] processing image 51/66
+[INFO] processing image 52/66
+[INFO] processing image 53/66
+[INFO] processing image 54/66
+[INFO] processing image 55/66
+[INFO] processing image 56/66
+[INFO] processing image 57/66
+[INFO] processing image 58/66
+[INFO] processing image 59/66
+[INFO] processing image 60/66
+[INFO] processing image 61/66
+[INFO] processing image 62/66
+[INFO] processing image 63/66
+[INFO] processing image 64/66
+[INFO] processing image 65/66
+[INFO] processing image 66/66
+**** DATA SAVED SUCESS ****
+"""
